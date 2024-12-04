@@ -1,9 +1,9 @@
 import React from "react";
 import Child from "./Child";
 
-function Father({houseName, pocketMoney}) {
+function Father() {
 
-  return <Child houseName={houseName} pocketMoney={pocketMoney}/>;
+  return <Child />;
 }
 
 export default Father;
