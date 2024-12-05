@@ -48,26 +48,73 @@
 //   );
 // }
 
-import HeavyComponent from "./components/HeavyComponent";
+// import HeavyComponent from "./components/HeavyComponent";
+
+// function App() {
+//   const navStyle = {
+//     backgroundColor: "yellow",
+//     marginBottom: "30px",
+//   };
+  
+//   const footerStyle = {
+//     backgroundColor: "green",
+//     marginTop: "30px",
+//   };
+  
+//   return (
+//   	<div>
+//       <nav style={navStyle}>네비게이션 바</nav>
+//  	  <HeavyComponent />
+//       <footer style={footerStyle}>푸터</footer>
+//     </div>
+//   );
+// }
+
+import React, { useState, useEffect, useMemo } from "react";
 
 function App() {
-  const navStyle = {
-    backgroundColor: "yellow",
-    marginBottom: "30px",
-  };
+  const [isAlive, setIsAlive] = useState(true);
+  const [uselessCount, setUselessCount] = useState(0);
   
-  const footerStyle = {
-    backgroundColor: "green",
-    marginTop: "30px",
-  };
+  const user = useMemo(() => {
+    return {
+   	  name: "홍길동",
+      age: 21,
+      isAlive: isAlive ? "생존" : "사망",
+    };
+  },[isAlive]);
+  
+  useEffect(() => {
+    console.log("생존여부가 바뀔 때만 호출!");
+  },[user]);
   
   return (
-  	<div>
-      <nav style={navStyle}>네비게이션 바</nav>
- 	  <HeavyComponent />
-      <footer style={footerStyle}>푸터</footer>
+    <div>
+      <div>
+        내 이름은 {user.name}이고, {user.age}살이야.
+      </div>
+	  <br/>
+      <div>
+        <button onClick={() => {
+          setIsAlive(!isAlive);
+          }}
+        >
+          누르면 살았다 죽었다 합니다
+        </button>
+		<br/>
+        생존여부 : {user.isAlive}
+      </div>
+      <br/>
+        {uselessCount}  
+      <br/>
+      <button onClick={() => {
+        setUselessCount(uselessCount + 1);
+        }}
+      > 숫자 증가
+      </button>
     </div>
   );
+  
 }
 
 export default App;
